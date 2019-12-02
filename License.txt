@@ -1,0 +1,17 @@
+####################################################################
+Author: João Lucas
+Github: https://github.com/joaojacintho
+####################################################################
+
+License:
+	This is a concept game, so you can use all things in this repo, but if you wanted stay this document in the root folder, I gonna be grateful.
+
+	This repository uses PixaBay images, that a bank of free image on the internet.
+
+####################################################################
+
+About me And this repo
+
+	Hi I'm João Lucas, so, I creted this repo for study Javascript, in this moment (Sep / 15/2019) I study in the Bandtec, my course is analysis and systems development (I think this is the correct name in Portuguese ) it's like a college in USA, However, I'm learning a lot in this course, and I created this repo for solidfy my knowledge, that is it.
+
+Thank you, for you attention.
