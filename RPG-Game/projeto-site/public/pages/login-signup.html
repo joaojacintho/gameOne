@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Sign In / Sign Up</title>
+  <link rel="stylesheet" href="../assets/css/login.css" />
+</head>
+
+<body>
+  <div class="bg-form">
+    <div class="form-box">
+      <div id="formSignIn" class="signIn-Form">
+        <span class="form-Title">
+          Sign In
+        </span>
+        <div class="img-form">
+          <img src="../assets/img/knight.png" alt="Knight" />
+        </div>
+
+        <form method="post" onsubmit="return logar()" name="signin" id="formLogin">
+          <input id="email" type="text" placeholder="Email" name="nome" />
+          <input id="senha" type="password" placeholder="Password" name="senha" />
+          <button type="submit" class="btn3">
+            Sign In
+          </button>
+        </form>
+        <span id="msg"></span>
+        <br />
+
+        <span class="create-account">
+          <a href="#" id="createAccount">
+            Criar uma conta
+          </a>
+        </span>
+      </div>
+
+      <!-- E para estar aqui -->
+
+      <div id="formSingUp" class="signUp-Form form-invisible">
+        <span class="form-Title">
+          Sign In
+        </span>
+        <div class="img-form">
+          <img src="../assets/img/Character/wizard.png" alt="wizard" />
+        </div>
+
+        <form method="post" onsubmit="return cadastrar(event)" name="signup" id="cadUsuario">
+          <input type="text" placeholder="Email" name="emailCadastro" />
+          <input type="text" placeholder="Usuario" name="usuario" />
+          <input type="password" placeholder="Password" name="cadsenha" id="cadsenha" />
+          <input type="password" placeholder="Confirmar Senha" name="confirmaSenha" id="cadconfirmaSenha" />
+          <button type="submit" class="btn3">
+            Sign Up
+          </button>
+        </form>
+
+        <span id="msg2"></span>
+        <br />
+        <br />
+        <span class="create-account">
+          <a href="#" id="makeLogin">
+            Fazer Login
+          </a>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <script src="../assets/js/formChange.js"></script>
+  <script src="../assets/js/valida.js"></script>
+</body>
+
+</html>
+
+
+<script>
+  function cadastrar(event) {
+    event.preventDefault();
+
+    if (cadsenha.value != cadconfirmaSenha.value) {
+      msg2.innerHTML = "As senhas não coincidem";
+      cadsenha.focus();
+      msg2.style.color = "red";
+    } else {
+      var formulario = new URLSearchParams(new FormData(cadUsuario));
+      fetch("/usuarios/cadastrar", {
+        method: "POST",
+        body: formulario
+      }).then(function (response) {
+
+        if (response.ok) {
+
+          window.location.href = './usuarioCadastrado.html';
+
+        } else {
+
+          console.log('Erro de cadastro!');
+          response.text().then(function (resposta) {
+            console.log(resposta)
+          });
+        }
+      });
+
+      return false;
+    }
+  }
+
+
+
+  function logar() {
+    var formulario = new URLSearchParams(new FormData(formLogin));
+    fetch("/usuarios/autenticar", {
+      method: "POST",
+      body: formulario
+    }).then(resposta => {
+
+      if (resposta.ok) {
+
+        resposta.json().then(json => {
+
+          window.location.href = './usuarioCadastrado.html';
+        });
+
+      } else {
+
+        console.log('Erro de login!');
+
+        response.text().then(texto => {
+          console.error(texto);
+        });
+      }
+    });
+
+    return false;
+  }
+</script>
